@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Personal portfolio website built with semantic HTML5, accessibility features, ARIA labels, SEO meta tags, and a keyboard-friendly contact form."
+  />
+  <meta
+    name="keywords"
+    content="portfolio, semantic HTML5, accessibility, WCAG, ARIA, frontend developer, SEO"
+  />
+  <meta name="author" content="Alex Carter" />
+
+  <title>Alex Carter | Accessible Portfolio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background-color: #f9fafb;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 1rem;
+      background-color: #111827;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      z-index: 100;
+      text-decoration: none;
+      border-radius: 0.25rem;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+      outline: 3px solid #93c5fd;
+    }
+
+    header {
+      background-color: #111827;
+      color: #ffffff;
+      padding: 1rem;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    nav h1 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover,
+    nav a:focus,
+    nav a[aria-current="page"] {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    section,
+    article,
+    aside {
+      margin-bottom: 2rem;
+    }
+
+    .hero {
+      padding: 2rem;
+      background-color: #e0f2fe;
+      border-radius: 0.5rem;
+    }
+
+    .hero h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: #111827;
+    }
+
+    .button,
+    button {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 0.35rem;
+      text-decoration: none;
+      cursor: pointer;
+      font: inherit;
+      font-weight: bold;
+    }
+
+    .button:hover,
+    .button:focus,
+    button:hover,
+    button:focus {
+      background-color: #1d4ed8;
+      outline: 3px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 1.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    form {
+      max-width: 650px;
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.35rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #9ca3af;
+      border-radius: 0.35rem;
+      font: inherit;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 3px solid #93c5fd;
+      border-color: #2563eb;
+    }
+
+    .hint {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-top: 0.25rem;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #111827;
+      color: #ffffff;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+      }
+
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav aria-label="Primary navigation">
+      <h1>Alex Carter</h1>
+
+      <ul>
+        <li><a href="#home" aria-current="page">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Accessible Web Developer</h2>
+      <p>
+        I build clean, semantic, responsive, and user-friendly websites that are
+        easy to use for everyone, including screen reader and keyboard users.
+      </p>
+      <a href="#projects" class="button">View My Work</a>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About Me</h2>
+      <p>
+        I am a frontend developer focused on semantic HTML5, accessibility,
+        responsive layouts, and SEO-friendly website structure.
+      </p>
+
+      <aside aria-labelledby="quick-info-title" class="card">
+        <h3 id="quick-info-title">Quick Info</h3>
+        <ul>
+          <li>Role: Frontend Developer</li>
+          <li>Focus: HTML5, CSS, Accessibility, SEO</li>
+          <li>Goal: Building websites that work for all users</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section aria-labelledby="skills-title">
+      <h2 id="skills-title">Key Skills</h2>
+
+      <article class="card">
+        <h3>Semantic HTML5</h3>
+        <p>
+          Uses meaningful HTML tags such as header, nav, main, section, article,
+          aside, and footer.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Accessibility</h3>
+        <p>
+          Includes skip links, keyboard focus styles, ARIA labels, readable
+          structure, and properly labelled form fields.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>SEO Optimization</h3>
+        <p>
+          Uses optimized title tags, meta descriptions, heading hierarchy, and
+          structured content.
+        </p>
+      </article>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+
+      <div class="projects">
+        <article class="card">
+          <h3>Accessible Portfolio Website</h3>
+          <p>
+            A semantic personal portfolio website built with HTML5 and WCAG
+            accessibility practices.
+          </p>
+          <a href="#" aria-label="View details for Accessible Portfolio Website">
+            View Project
+          </a>
+        </article>
+
+        <article class="card">
+          <h3>Accessible Contact Form</h3>
+          <p>
+            A keyboard-friendly contact form using proper labels, hints, and
+            focus indicators.
+          </p>
+          <a href="#" aria-label="View details for Accessible Contact Form">
+            View Project
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Me</h2>
+
+      <form action="#" method="post" aria-labelledby="contact-title">
+        <fieldset>
+          <legend>Send a Message</legend>
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              aria-describedby="name-hint"
+            />
+            <p id="name-hint" class="hint">Enter your full name.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-describedby="email-hint"
+            />
+            <p id="email-hint" class="hint">Example: name@example.com</p>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              required
+              aria-describedby="subject-hint"
+            />
+            <p id="subject-hint" class="hint">Write the topic of your message.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              aria-describedby="message-hint"
+            ></textarea>
+            <p id="message-hint" class="hint">Write your message clearly.</p>
+          </div>
+
+          <button type="submit">Send Message</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Alex Carter. All rights reserved.</p>
+  </footer>
+</body>
+</html>

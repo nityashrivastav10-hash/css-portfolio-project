@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --accent: #06b6d4;
+      --border: #e2e8f0;
+      --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    body.dark {
+      --bg: #020617;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --card: #0f172a;
+      --primary: #60a5fa;
+      --accent: #22d3ee;
+      --border: #1e293b;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .theme-btn {
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    .hero {
+      min-height: 80vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content span {
+      color: var(--primary);
+    }
+
+    .hero-content p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 620px;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 1px solid var(--primary);
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn.secondary {
+      color: var(--primary);
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      padding: 2rem;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      color: white;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    .profile-card h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .skills-grid,
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill,
+    .project {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, border 0.3s;
+    }
+
+    .skill:hover,
+    .project:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+    }
+
+    .skill h3,
+    .project h3 {
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .profile-card {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 2rem;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">Portfolio</div>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Hello, I'm <span>Alex Carter</span></h1>
+        <p>
+          I build clean, responsive and modern websites using HTML, CSS,
+          JavaScript, CSS Grid, Flexbox and mobile-first design principles.
+        </p>
+
+        <div class="btn-group">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <h2>Frontend Developer</h2>
+        <p>Responsive layouts, clean UI and modern web experiences.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+
+      <div class="about">
+        <div class="about-box">
+          <h3>Who I Am</h3>
+          <p>
+            I am a web designer and developer focused on creating accessible,
+            attractive and fully responsive portfolio websites.
+          </p>
+        </div>
+
+        <div class="about-box">
+          <h3>What I Do</h3>
+          <p>
+            I use semantic HTML, advanced CSS3, CSS variables, Grid, Flexbox and
+            media queries to build layouts that work on mobile, tablet and desktop.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill">
+          <h3>HTML5</h3>
+          <p>Semantic and accessible page structure.</p>
+        </div>
+
+        <div class="skill">
+          <h3>CSS Grid</h3>
+          <p>Two-dimensional responsive page layouts.</p>
+        </div>
+
+        <div class="skill">
+          <h3>Flexbox</h3>
+          <p>Flexible component alignment and spacing.</p>
+        </div>
+
+        <div class="skill">
+          <h3>Media Queries</h3>
+          <p>Mobile-first responsive breakpoints.</p>
+        </div>
+
+        <div class="skill">
+          <h3>CSS Variables</h3>
+          <p>Reusable colors and dynamic theme support.</p>
+        </div>
+
+        <div class="skill">
+          <h3>UI Design</h3>
+          <p>Clean visual hierarchy and modern interface styling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="projects-grid">
+        <article class="project">
+          <h3>Portfolio Website</h3>
+          <p>A fully responsive personal portfolio using CSS Grid and Flexbox.</p>
+        </article>
+
+        <article class="project">
+          <h3>Landing Page</h3>
+          <p>A modern business landing page with responsive sections.</p>
+        </article>
+
+        <article class="project">
+          <h3>Dashboard UI</h3>
+          <p>A clean dashboard layout with cards, grids and theme support.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <div>
+          <h2>Let's Work Together</h2>
+          <p>Available for web design and frontend development projects.</p>
+        </div>
+
+        <a href="mailto:hello@example.com" class="btn primary">Email Me</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Alex Carter. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+
+      const button = document.querySelector(".theme-btn");
+
+      if (document.body.classList.contains("dark")) {
+        button.textContent = "Light Mode";
+      } else {
+        button.textContent = "Dark Mode";
+      }
+    }
+  </script>
+</body>
+</html>
